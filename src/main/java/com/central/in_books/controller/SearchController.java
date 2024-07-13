@@ -5,17 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.central.in_books.domain.BookSearch;
+import com.central.in_books.domain.BookResponse;
 import com.central.in_books.entity.Author;
 import com.central.in_books.entity.Book;
 import com.central.in_books.service.SearchService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3001")
 public class SearchController {
 	
 	@Autowired
@@ -29,9 +32,9 @@ public class SearchController {
 //	}
 	
 	@PostMapping(value="/books/search")
-	public ResponseEntity<List<Book>> getBooksByCustomSearch(@RequestBody BookSearch body) {
-		List<Book> books = searchService.searchBooks(body);			
-		ResponseEntity<List<Book>> res = new ResponseEntity<>(books, HttpStatus.OK);
+	public ResponseEntity<List<BookResponse>> getBooksByCustomSearch(@RequestBody BookSearch body) {
+		List<BookResponse> books = searchService.searchBooks(body);			
+		ResponseEntity<List<BookResponse>> res = new ResponseEntity<>(books, HttpStatus.OK);
 		return res;
 	}
 
