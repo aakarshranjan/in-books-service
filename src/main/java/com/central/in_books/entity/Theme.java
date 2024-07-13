@@ -1,5 +1,7 @@
 package com.central.in_books.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="theme")
-public class Theme {
+public class Theme implements Serializable{
+	private static final long serialVersionUID = 1630453785166226318L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -55,5 +59,9 @@ public class Theme {
 		this.name = name;
 		this.imgUrl = imgUrl;
 		this.description = description;
+	}
+	
+	public Theme() {
+		super();
 	}
 }

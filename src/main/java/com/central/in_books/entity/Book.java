@@ -1,16 +1,23 @@
 package com.central.in_books.entity;
 
+import java.io.Serializable;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="book")
-public class Book {
+public class Book implements Serializable{
 	
+	private static final long serialVersionUID = -3213731360408209802L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -24,16 +31,20 @@ public class Book {
 	@Column(name="description")
 	private String description;
 	
-	@Column(name="author")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="author_id", referencedColumnName="id")
 	private Author author;
 	
-	@Column(name="category")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="category_id", referencedColumnName="id")
 	private Category category;
 	
-	@Column(name="genre")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="genre_id", referencedColumnName="id")
 	private Genre genre;
 	
-	@Column(name="theme")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="theme_id", referencedColumnName="id")
 	private Theme theme;
 
 	public Long getId() {
@@ -111,6 +122,10 @@ public class Book {
 		this.category = category;
 		this.genre = genre;
 		this.theme = theme;
+	}
+	
+	public Book() {
+		super();
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.central.in_books.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,8 +11,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="author")
-public class Author {
+public class Author implements Serializable{
 	
+	private static final long serialVersionUID = -2680041768413549127L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -56,6 +60,10 @@ public class Author {
 		this.name = name;
 		this.imgUrl = imgUrl;
 		this.description = description;
+	}
+	
+	public Author() {
+		super();
 	}
 	
 	
